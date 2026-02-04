@@ -3,10 +3,14 @@ import os
 from pathlib import Path
 import instructor
 from ollama import Client
+from openai import OpenAI
 from typing import List
 
 # --- Setup ---
-client = instructor.patch(Client())
+client = instructor.from_openai(
+    OpenAI(base_url="http://localhost:11434/v1", api_key="ollama"),
+    mode=instructor.Mode.JSON
+)
 INDEX_FILE = "index.json"
 
 class SiliceBridge:
